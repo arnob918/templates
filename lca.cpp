@@ -3,7 +3,7 @@
 int table[N][LN];
 vector<int> dis;
 vector<int> par(N);
-vector<int> po(20);
+vector<int> po(LN);
 
 vector<int> bfs(int x)
 {
@@ -54,7 +54,7 @@ int lca(int u, int v)
 {
     if(dis[u] < dis[v]){
         int x = dis[v]-dis[u];
-        for(int i=19; i>=0; i--){
+        for(int i=LN-1; i>=0; i--){
             if(po[i]<=x){
                 v = table[v][i];
                 x -= po[i];
@@ -63,7 +63,7 @@ int lca(int u, int v)
     }
     else if(dis[u] > dis[v]){
         int x = dis[u] - dis[v];
-        for(int i=19; i>=0; i--){
+        for(int i=LN-1; i>=0; i--){
             if(po[i]<=x){
                 u = table[u][i];
                 x -= po[i];
@@ -75,7 +75,7 @@ int lca(int u, int v)
         return u;
     }
 
-    for(int i=19; i>=0; i--){
+    for(int i=LN-1; i>=0; i--){
         if(dis[u] >= po[i] && table[u][i] != table[v][i]){
             u = table[u][i];
             v = table[v][i];
