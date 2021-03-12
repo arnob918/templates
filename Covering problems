@@ -1,5 +1,5 @@
 Maximum Independent Set(Bipartite):
-    -Largest set of nodes who do not have any edge between them.
+    -Largest set of nodes which do not have any edge between them.
     -sol: V-(MaxMatching)
     
 Minimum Vertex Cover(Bipartite):
@@ -8,7 +8,7 @@ Minimum Vertex Cover(Bipartite):
     
 Minimum Edge Cover(General graph):
     -Smallest set of edges to cover all the nodes
-    -sol: V-(MaxMatching) (if edge cover exist, does not exit for isolated nodes)
+    -sol: V-(MaxMatching) (if edge cover exists, does not exit for isolated nodes)
     
 Minimum Path Cover(Vertex disjoint) DAG:
     -Minimum number of vertex disjoint paths that visit all the nodes
