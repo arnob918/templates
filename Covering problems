@@ -17,6 +17,6 @@ Minimum Path Cover(Vertex disjoint) DAG:
     
 Minimum Path Cover(Vertex Not Disjoint) General graph:
     -Minimum number of paths that visit all the nodes
-    -sol: make a bipartite graph using same nodes in two sides, one side is "from" other is "to",add one edge from "from a" to "to b" if
-          b is reachable from a using one or more edge, then ans is V-(MaxMatching)
+    -sol: consider cycles as nodes then it will become a path cover problem with vertex disjoint on DAG
+    
           
