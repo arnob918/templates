@@ -1,4 +1,3 @@
-
 void radix_sort(vector<pair<pair<int, int>, int> > &a)
 {
     int n = a.size();
@@ -76,4 +75,22 @@ vector<int> suff_array(string s)
         k++;
     }
     return p;
+}
+
+vector<int> lcp(vector<int> &p, string s){
+	int n = p.size();
+	vector<int> c(n+1);
+	for(int i=0; i<n; i++){
+		c[p[i]] = i;
+	}
+	vector<int> ret(n);
+	int k = 0;
+	for(int i=0; i<n; i++){
+		int pp = c[i];
+		int j = p[pp-1];
+		while(i+k<n && j+k<n && s[i+k] == s[j+k]) k++;
+		ret[pp] = k;
+		k = max(0, k-1);
+	}	
+	return ret;
 }
