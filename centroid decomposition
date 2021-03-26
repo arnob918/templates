@@ -30,6 +30,7 @@ void Decomposition(int child, int parent=-1){
 		//cout << CentroidNode << " " << parent << endl;
 		composedtree[CentroidNode].push_back(parent);
 		composedtree[parent].push_back(CentroidNode);
+		//Par[CentroidNode] = parent;
 	}
 	for(auto newchild: Graph[CentroidNode]){
 		auto it = find(Graph[newchild].begin(), Graph[newchild].end(), CentroidNode);
