@@ -3,12 +3,13 @@ int NodesCount, root=-1;
 int SubTreeNodeCount[N], Par[N];
 vector<int> Graph[N], composedtree[N];
 int depth[N];
+bool vis[N];
 
 void DepthFirstSearch(int Child, int Parent){
 	NodesCount++;
 	SubTreeNodeCount[Child] = 1;
 	for(auto NewChild: Graph[Child]){
-		if(NewChild == Parent) continue;
+		if(NewChild == Parent || vis[NewChild] == 1) continue;
 		DepthFirstSearch(NewChild, Child);
 		SubTreeNodeCount[Child] += SubTreeNodeCount[NewChild];
 	}
@@ -16,7 +17,7 @@ void DepthFirstSearch(int Child, int Parent){
 
 int GetCentroidNode(int Child, int Parent){
 	for(auto NewChild: Graph[Child]){
-		if(NewChild == Parent) continue;
+		if(NewChild == Parent || vis[NewChild] == 1) continue;
 		if(SubTreeNodeCount[NewChild] > (NodesCount>>1)) return GetCentroidNode(NewChild, Child);
 	}
 	return Child;
@@ -34,10 +35,9 @@ void Decomposition(int child, int Depth, int parent=-1){
 		composedtree[parent].push_back(CentroidNode);
 		//Par[CentroidNode] = parent;
 	}
+	vis[CentroidNode] = 1;
 	for(auto newchild: Graph[CentroidNode]){
-		auto it = find(Graph[newchild].begin(), Graph[newchild].end(), CentroidNode);
-		if(it != Graph[newchild].end())
-			Graph[newchild].erase(it);
+		if(newchild == parent || vis[newchild] == 1) continue;
 		Decomposition(newchild, Depth+1, CentroidNode);
 	}
 }
