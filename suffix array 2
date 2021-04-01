@@ -1,0 +1,122 @@
+const int N = 2*1200006;
+string str;
+int n;
+int p[N], c[N], lc[N];
+pair<char, int> order[N];
+pair<pair<int, int>, int> a[N];
+pair<pair<int, int>, int> tmp[N];
+int cnt[N], pos[N];
+
+void suff_array(){
+	str += "$";
+	for(int i=0; i<n; i++){
+		order[i] = {str[i], i};
+	}
+	sort(order, order+n);
+	for(int i=0; i<n; i++) p[i] = order[i].second;
+	c[p[0]] = 0;
+	for(int i=1; i<n; i++){
+		if(order[i].first == order[i-1].first){
+			c[p[i]] = c[p[i-1]];
+		}
+		else{
+			c[p[i]] = c[p[i-1]]+1;
+		}
+	}
+	int k = 0;
+	while((1<<k) < n){
+		for(int i=0; i<n; i++){
+			a[i] = {{c[i], c[(i+(1<<k))%n]}, i};
+		}
+		//sort(a, a+n);
+		for(int i=0; i<n; i++){
+			cnt[i] = 0;
+		}
+		for(int i=0; i<n; i++){
+			cnt[a[i].first.second]++;
+		}
+		pos[0] = 0;
+		for(int i=1; i<n; i++){
+			pos[i] = pos[i-1]+cnt[i-1];
+		}
+		for(int i=0; i<n; i++){
+			int j = a[i].first.second;
+			tmp[pos[j]] = a[i];
+			pos[j]++;
+		}
+		for(int i=0; i<n; i++){
+			cnt[i] = 0;
+		}
+		for(int i=0; i<n; i++){
+			cnt[tmp[i].first.first]++;
+		}
+		pos[0] = 0;
+		for(int i=1; i<n; i++){
+			pos[i] = pos[i-1]+cnt[i-1];
+		}
+		for(int i=0; i<n; i++){
+			int j = tmp[i].first.first;
+			a[pos[j]] =  tmp[i];
+			pos[j]++;
+		}
+		for(int i=0; i<n; i++) p[i] = a[i].second;
+		c[p[0]] = 0;
+		for(int i=1; i<n; i++){
+			if(a[i].first == a[i-1].first){
+				c[p[i]] = c[p[i-1]];
+			}
+			else{
+				c[p[i]] = c[p[i-1]]+1;
+			}
+		}
+		k++;
+	}
+}
+
+void LCP(){
+	int k = 0;
+	for(int i=0; i<n; i++){
+		int pp = c[i];
+		int j = p[pp-1];
+		while(i+k<n && j+k<n && str[i+k] == str[j+k]) k++;
+		lc[pp] = k;
+		k = max(0, k-1);
+	}
+}
+
+
+int tb[N][23];
+
+void sptb(){
+	for(int i=0; i<n; i++){
+		for(int j=0; j<23; j++){
+			tb[i][j] = -1;
+		}
+	}
+	for(int i=0; i<n; i++){
+		tb[i][0] = lc[i];
+	}
+	for(int po=0; po<22; po++){
+		for(int i=0; i<n; i++){
+			if(i+(1<<po)>=n || tb[i+(1<<po)][po] == -1) break;
+			tb[i][po+1] = min(tb[i][po], tb[i+(1<<po)][po]);
+		}
+	}
+}
+
+int mmin(int u, int v){
+	if(u > v) swap(u, v);
+	u++;
+	int dis = v-u+1;
+	dis = log2(dis);
+	return min(tb[u][dis], tb[v-(1<<dis)+1][dis]);
+}
+
+int main()
+{
+    cin >> str;
+    suff_array();
+    LCP();
+    sptb();
+
+}
