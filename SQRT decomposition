@@ -1,6 +1,7 @@
 struct sqrtDecomposition
 {
     static const int sz = 320;//sz = sqrt(N);
+    int numberofblocks;
     
     struct node
 	{
@@ -73,7 +74,7 @@ struct sqrtDecomposition
 	vector<node> blocks;
 	
 	void init(int n){
-		int numberofblocks = n/sz +1;
+		numberofblocks = n/sz +1;
 		int curL = 1, curR = sz;
 		blocks.resize(numberofblocks+5);
 		for(int i=1; i<=numberofblocks; i++){
