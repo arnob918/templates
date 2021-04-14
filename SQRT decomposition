@@ -74,7 +74,7 @@ struct sqrtDecomposition
 	vector<node> blocks;
 	
 	void init(int n){
-		numberofblocks = n/sz +1;
+		numberofblocks = (n+sz-1)/sz;
 		int curL = 1, curR = sz;
 		blocks.resize(numberofblocks+5);
 		for(int i=1; i<=numberofblocks; i++){
