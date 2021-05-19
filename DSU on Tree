@@ -36,19 +36,19 @@ void dfs(int u, int p = -1, int isb = 1){
 	else{
 		dsu[u] = new vector<int>();
 	}
-	dsu[u]->pb(u);
+	dsu[u]->push_back(u);
 	
 	//calculation
 	
 	for(auto v: adj[u]){
 		if(v == p || v == big) continue;
 		for(auto x: *dsu[v]){
-			dsu[u]->pb(x);
+			dsu[u]->push_back(x);
 			//calculation
 		}
 	}
 	
-	//calculation
+	//calculate ans for node u
 	
 	if(isb == 0){
 		for(auto x: *dsu[u]){
