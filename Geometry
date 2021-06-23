@@ -1,0 +1,19 @@
+struct point{
+    long long int x, y;
+    point(){}
+ 
+    point(long long int qx, long long int qy) {x = qx, y = qy;}
+} origin = point(0, 0);
+
+point operator+(const point &u, const point &v) {return point(u.x + v.x, u.y + v.y);}
+point operator-(const point &u, const point &v) {return point(u.x - v.x, u.y - v.y);}
+point operator*(const point &u, const point &v) {return point(u.x * v.x - u.y * v.y, u.x * v.y + v.x * u.y);} //complex numbers  multiplication
+point operator*(const point &u, long long int v) {return point(u.x*v, u.y*v);}
+point operator*(long long int v, const point &u) {return point(u.x*v, u.y*v);}
+bool operator != (const point &u, const point &v) {return !((u.x == v.x) && (u.y == v.y));}
+
+double length(point u){return sqrt(u.x*u.x*1.0 + u.y*u.y*1.0);}
+double arg(point u){ assert(u != origin); return atan2(u.y, u.x);}
+
+double dot(point u, point v) {return u.x * v.x + u.y * v.y;}
+double cross(point u, point v) {return u.x * v.y - u.y * v.x;}
