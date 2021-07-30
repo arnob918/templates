@@ -61,7 +61,7 @@ public:
 		}
 		return res;
 	}
-	mat operator ^ (lli b) const {
+	mat operator ^ (long long int b) const {
 		mat<T> res(r, c);
 		res.makeidentity();
 		mat<T> gg = *this;
