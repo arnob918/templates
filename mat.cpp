@@ -5,7 +5,7 @@ class mat{
 public:
 	int r, c;
 	vector<vector<T> > m;
-	mat(int rr=0, int cc=0){
+	mat(int rr=0, int cc=0){ //be sure to call te constructor to set r and c(must!!!!?? very important)
 		m.resize(rr);
 		for(auto &v: m){
 			v.resize(cc);
