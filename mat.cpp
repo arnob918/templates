@@ -1,4 +1,4 @@
-lli mod = 1e9+7;
+long long int mod = 1e9+7;
 
 template<typename T>
 class mat{
