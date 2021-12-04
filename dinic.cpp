@@ -12,7 +12,7 @@ struct Dinic
     vector<vector<int>>adj;
     vector<int>d,pt;
     Dinic(int N):N(N),edge(0),adj(N),d(N),pt(N){}
-    void addEdge(int u,int v, lli cap)
+    void addEdge(int u,int v, long long int cap)
     {
         if(u==v) return;
         edge.emplace_back(u,v,cap);
