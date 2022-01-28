@@ -15,6 +15,7 @@ point operator*(const point &u, const point &v) {return point(u.x * v.x - u.y * 
 point operator*(const point &u, long long int v) {return point(u.x*v, u.y*v);}
 point operator*(long long int v, const point &u) {return point(u.x*v, u.y*v);}
 bool operator != (const point &u, const point &v) {return !((u.x == v.x) && (u.y == v.y));}
+bool operator == (const point &u, const point &v) {return ((u.x == v.x) && (u.y == v.y));}
 
 
 bool operator < (const point &u, const point &v) {return u.x<v.x || (u.x==v.x && u.y<v.y);}
